@@ -1,4 +1,30 @@
-def call(buildBody = null, testBody=null) {
+//def call(buildBody = null, testBody=null) {
+//    pipeline {
+//        agent any
+//        stages {
+//            stage('Build') {
+//                steps {
+//                    script {
+//                        print("Quack!")
+//                        buildBody != null ? buildBody() : DefaultBuildStep()
+//                    }
+//                }
+//            }
+//
+//
+//            stage('Test') {
+//                steps {
+//                    script {
+//                        print("Quack! Quack! Time for tests!")
+//                        print(testBody)
+//                        testBody != null ? testBody() : DefaultTestStep()
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
+def call(Map params) {
     pipeline {
         agent any
         stages {
@@ -6,7 +32,7 @@ def call(buildBody = null, testBody=null) {
                 steps {
                     script {
                         print("Quack!")
-                        buildBody != null ? buildBody() : DefaultBuildStep()
+                        params.buildBody != null ? params.buildBody() : DefaultBuildStep()
                     }
                 }
             }
@@ -16,15 +42,13 @@ def call(buildBody = null, testBody=null) {
                 steps {
                     script {
                         print("Quack! Quack! Time for tests!")
-                        print(testBody)
-                        testBody != null ? testBody() : DefaultTestStep()
+                        params.testBody != null ? params.testBody() : DefaultTestStep()
                     }
                 }
             }
         }
     }
 }
-
 
 def DefaultBuildStep() {
     echo 'Running default build step';
