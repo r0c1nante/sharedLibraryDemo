@@ -31,5 +31,5 @@ def DefaultBuildStep() {
 
 
 def DefaultTestStep() {
-    echo 'Running default build step';
+    echo 'Running default test step';
 }
