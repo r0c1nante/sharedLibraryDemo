@@ -1,4 +1,4 @@
-def call(body = null) {
+def call(buildBody = null, testBody=null) {
     pipeline {
         agent any
         stages {
@@ -6,7 +6,17 @@ def call(body = null) {
                 steps {
                     script {
                         print("Quack!")
-                        body != null ? body() : DefaultBuildStep()
+                        buildBody != null ? buildBody() : DefaultBuildStep()
+                    }
+                }
+            }
+
+
+            stage('Test') {
+                steps {
+                    script {
+                        print("Quack! Quack! Time for tests!")
+                        testBody != null ? testBody() : DefaultTestStep()
                     }
                 }
             }
@@ -15,6 +25,11 @@ def call(body = null) {
 }
 
 
-def PostBuildStep() {
+def DefaultBuildStep() {
+    echo 'Running default build step';
+}
+
+
+def DefaultTestStep() {
     echo 'Running default build step';
 }
