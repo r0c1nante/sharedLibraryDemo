@@ -16,6 +16,7 @@ def call(buildBody = null, testBody=null) {
                 steps {
                     script {
                         print("Quack! Quack! Time for tests!")
+                        print(testBody)
                         testBody != null ? testBody() : DefaultTestStep()
                     }
                 }
