@@ -5,6 +5,7 @@ def call(body = null) {
             stage('Build') {
                 steps {
                     script {
+                        print("Quack!")
                         body != null ? body() : DefaultBuildStep()
                     }
                 }
